@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -90,6 +91,29 @@
             }
         })
     }
+
+    function submitForm(){
+        let postData = {
+            planName: $('form').find('input[name="namaMisi"]').val(),
+            GeoJSON: $('form').find('textarea[name="GeoJSON"]').val()
+        }
+        $.post(
+                '/misi', postData,
+                (res) => {
+                    if (res.status === 'success') {
+                        alert('success')
+                    } else {
+                        alert('Failed to save the mission');
+                    }
+
+                    getMission()
+                }
+        )
+
+        $('form').find('input[name="namaMisi"]').val('')
+        $('form').find('textarea[name="GeoJSON"]').val('')
+
+    }
 </script>
 
 
@@ -118,7 +142,7 @@
             let missionName = prompt("Mission name:");
             $.post(
                 '/misi', {
-                    namaMisi: missionName,
+                    planName: missionName,
                     GeoJSON: JSON.stringify(editableLayers.toGeoJSON())
                 },
                 (res) => {
@@ -131,7 +155,7 @@
 
                     getMission()
                 }
-            );
+            )
         }
     
 </script>
