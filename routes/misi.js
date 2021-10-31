@@ -5,7 +5,6 @@ var db  = require("../db/db")
 
 // post new mission
 router.post('/', function(req, res, next) {
-  console.log(req.body)
    db.run(`INSERT INTO MissionPlan(planName, g3wp) VALUES (?,?)`,
    [req.body.planName, req.body.GeoJSON], 
    (err) =>{
